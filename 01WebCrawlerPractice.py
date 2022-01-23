@@ -13,7 +13,6 @@ path = "/Users/lanz/Downloads/檔案/chromedriver" ## webdriver 的路徑
 driver = webdriver.Chrome(path)
 
 driver.get("https://www.dcard.tw/f") ## 前往Ｄ卡
-print(driver.title)
 search = driver.find_element_by_name("query")
 search.clear()
 search.send_keys("比特幣") ## 輸入“比特幣”
