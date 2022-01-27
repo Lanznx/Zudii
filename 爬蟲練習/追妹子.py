@@ -75,14 +75,10 @@ WebDriverWait(driver, 10).until(
 EC.presence_of_element_located((By.CSS_SELECTOR, ".sqdOP.L3NKy._4pI4F.y3zKF"))
 )
 
-for _ in range(5):
-    for follow in follows:
-        follow.click()
-    time.sleep(1)
-    more.click()
-
-
-
+for follow in follows:
+    follow.click()
+time.sleep(1)
+more.click()
 
 
 
