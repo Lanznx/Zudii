@@ -10,30 +10,35 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
+import requests
+from datetime import datetime
+# import sqlite3 # fot sqlute database support
+from bs4 import BeautifulSoup
+
+
+## -------- 路徑、帳密要自己改 --------
 path = "/Users/lanz/Downloads/檔案/chromedriver"
 driver = webdriver.Chrome(path)
 driver.get("https://zh-tw.facebook.com/")
-
 user = driver.find_element_by_id("email")
 user.send_keys("109305033@g.nccu.edu.tw")
 password = driver.find_element_by_id("pass")
 password.send_keys("Zudii@Andiidii")
+## -------- 路徑、帳密要自己改 --------
 log_in = driver.find_element_by_name("login")
 log_in.click()
 
-## 等到政大租客跑出來之後就點下去
-WebDriverWait(driver, 10).until(
-    EC.presence_of_element_located((By.XPATH, '//*[@id="mount_0_0_Lt"]/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div[1]/div/div/div[1]/div/div/div[1]/div[2]/ul/li/div/a/div[1]/div[2]/div/div/div/div/span/span'))
-)
-group_nccu = driver.find_element_by_xpath('//*[@id="mount_0_0_Lt"]/div/div[1]/div/div[3]/div/div/div[1]/div[1]/div/div[1]/div/div/div[1]/div/div/div[1]/div[2]/ul/li/div/a/div[1]/div[2]/div/div/div/div/span/span')
-group_nccu.click()
+## 關通知
+options = webdriver.ChromeOptions()
+prefs = {'profile.default_content_setting_values':{'notifications': 2}}
+options.add_experimental_option('prefs', prefs)
+
+## 前往政大租客
+time.sleep(2)
+driver.get('https://www.facebook.com/groups/NCCU.zuker')
 
 
 
-## 展開所有的「顯示更多」
-mores = driver.find_elements_by_class_name("oajrlxb2")
-for more in mores:
-    more.click()
 
 
 

@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 import time
+from bs4 import BeautifulSoup
  
 options = Options()
 options.add_argument("--disable-notifications")
@@ -30,4 +31,4 @@ for title in titles:
  
     if post:
         print(post.getText())
-chrome.quit()q
+chrome.quit()
