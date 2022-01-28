@@ -1,6 +1,7 @@
 # 爬 IG 練習
 # 自動追一堆妹子
 
+from re import I
 import time 
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
@@ -69,16 +70,17 @@ WebDriverWait(driver, 10).until(
 follows = driver.find_elements_by_css_selector(".sqdOP.L3NKy._4pI4F.y3zKF") ## 找出所有可以追蹤的按鍵
 
 
-more = driver.find_element_by_css_selector(".Kf8kP.coreSpritePagingChevron") ## 找出往右的鍵
+rights = driver.find_element_by_css_selector(".Kf8kP.coreSpritePagingChevron") ## 找出往右的鍵
 
 WebDriverWait(driver, 10).until(
 EC.presence_of_element_located((By.CSS_SELECTOR, ".sqdOP.L3NKy._4pI4F.y3zKF"))
 )
 
+i = 0
 for follow in follows:
     follow.click()
-time.sleep(1)
-more.click()
+    rights[i].click()
+    i += 1
 
 
 
