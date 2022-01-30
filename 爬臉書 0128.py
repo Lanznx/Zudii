@@ -27,26 +27,30 @@ password.submit()
 time.sleep(3)
 chrome.get('https://www.facebook.com/groups/NCCU.zuker')
 
-for i in range(5):
-    chrome.execute_script("window.scrollTo(0,document.body.scrollHeight)")
-    time.sleep(2)
 
-# u=0
-# clicks_more = chrome.find_elements_by_name('顯示更多')
-# while(clicks_more != null):
-#     clicks_more[u].click()
-#     u += 1
+## 把頁面滑到最下面 並 按下所有的顯示更多
+for i in range(100):
+    chrome.execute_script("window.scrollTo(0,document.body.scrollHeight)")
+    time.sleep(1.5)
+    more = """
+            var div_tags = document.getElementsByTagName("div") ; 
+            for(var i = 0 ; i < div_tags.length ; i ++) {
+                var div_text = div_tags[i].innerText;   
+                if(div_tags[i].innerText == "顯示更多") {
+                    div_tags[i].click() ;
+                }
+            }
+        """
+    chrome.execute_script(more)
 
 
 soup = BeautifulSoup(chrome.page_source, 'html.parser')
 ## 找出所有內文
 contents = soup.find_all('div', {'class': 'ecm0bbzt hv4rvrfc ihqw7lf3 dati1w0a'})
-
-line = 0
 for content in contents: 
     ## 把內文的每一行都找出來，並印出來
     posts = content.find_all('div', {'dir': 'auto'}, {'style': "text-align: start"})
     for post in posts:
-        print(post.getText())   
-    print("-----------")
+        print(post.getText())
+    print("-------------------------------------------")
 
